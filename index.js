@@ -23,6 +23,11 @@ app.post("/send", (req, res) => {
   }
 });
 
+// <-- add this route handler:
+app.get("/", (req, res) => {
+  res.send("Backend server is running!");
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
