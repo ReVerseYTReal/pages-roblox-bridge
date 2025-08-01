@@ -13,15 +13,16 @@ app.get("/messages", (req, res) => {
 });
 
 app.post("/send", (req, res) => {
-    const { sender, message } = req.body;
-    if (sender && message) {
-        messages.push({ sender, message });
-        if (messages.length > 100) messages.shift();
-        res.json({ status: "ok" });
-    } else {
-        res.status(400).json({ error: "Missing sender or message" });
-    }
+  const { sender, message, fromRoblox } = req.body;
+  if (sender && message) {
+    messages.push({ sender, message, fromRoblox }); // Save the flag!
+    if (messages.length > 100) messages.shift(); // Keep history limited
+    res.json({ status: "ok" });
+  } else {
+    res.status(400).json({ error: "Missing sender or message" });
+  }
 });
+
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
